@@ -1,0 +1,71 @@
+c:\Users\Kyle\Documents\python_stack\Django\Books-Authors\main>python manage.py shell
+Python 2.7.14 (v2.7.14:84471935ed, Sep 16 2017, 20:19:30) [MSC v.1500 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> Book.object.create(name="C sharp", desc="C# book desc...")
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Book' is not defined
+>>> Book.objects.create(name="C sharp", desc="C# book desc...")
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Book' is not defined
+>>> from apps.book_author.models import *
+>>> Book.objects.create(name="C sharp", desc="C# book desc...")
+<Book: Book object>
+>>> Book.objects.create(name="Java", desc="Java book desc...")
+<Book: Book object>
+>>> Book.objects.create(name="Python", desc="Python book desc...")
+<Book: Book object>
+>>> Book.objects.create(name="PHP", desc="PHP book desc...")
+<Book: Book object>
+>>> Book.objects.create(name="Ruby", desc="Ruby book desc...")
+<Book: Book object>
+>>> Author.objects.create(first_name="Mike", last_name="M", email="mike@email.com")
+<Author: Author object>
+>>> Author.objects.create(first_name="Speros", last_name="S", email="speros@email.com")
+<Author: Author object>
+>>> Author.objects.create(first_name="John", last_name="J", email="john@email.com")
+<Author: Author object>
+>>> Author.objects.create(first_name="Jadee", last_name="J", email="jadee@email.com")
+<Author: Author object>
+>>> Author.objects.create(first_name="Jay", last_name="J", email="jay@email.com")
+<Author: Author object>
+
+c:\Users\Kyle\Documents\python_stack\Django\Books-Authors\main>python manage.py shell
+Python 2.7.14 (v2.7.14:84471935ed, Sep 16 2017, 20:19:30) [MSC v.1500 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.book_author.models import *
+>>> new = Book.objects.first()
+>>> new.name = "C#"
+>>> new.save()
+>>> new2 = Author.objects.last()
+>>> new2.first_name="Ketul"
+>>> new2.save()
+>>> b = Book.objects.get(id=1)
+>>> a = Book.objects.get(id=2)
+>>> b1 = Author.objects.get(id=1)
+>>> b1.books.add(b, a)
+>>> b1.save()
+>>> a = Book.objects.get(id=1)
+>>> b = Book.objects.get(id=2)
+>>> c = Book.objects.get(id=3)
+>>> d = Author.objects.get(id=2)
+>>> d.books.add(a, b, c)
+>>> d.save()
+>>> d = Author.objects.get(id=4)
+>>> f = Book.objects.get(id=5)
+>>> d.books.add(a, b, c, e, f)
+>>> d.save()
+>>> Book.objects.get(id=3).authors.all()
+<QuerySet [<Author: Author object>, <Author: Author object>, <Author: Author object>]>
+>>> Book.objects.get(id=3).authors.first().delete()
+(4, {u'book_author.Author': 1, u'book_author.Author_books': 3})
+>>> d = Author.objects.get(id=5)
+>>> d.books.add(b)
+>>> d.save()
+>>> Author.objects.get(id=3).books.all()
+<QuerySet [<Book: Book object>, <Book: Book object>, <Book: Book object>, <Book: Book object>]>
+>>> Author.objects.get(id=2).books.all()
+<QuerySet [<Book: Book object>, <Book: Book object>, <Book: Book object>, <Book: Book object>]>
